@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
   # config.vm.network :bridged
   config.vm.synced_folder ".", "/home/vagrant/mschool"
 
-  $required_packages = %W{git g++ make python-setuptools curl memcached build-essential python-software-properties graphviz maven}
+  $required_packages = %W{git g++ make python-setuptools curl build-essential}
 
   $forwarded_ports = [8000]
   setup_apache_port config, 8080
