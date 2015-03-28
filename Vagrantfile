@@ -34,6 +34,7 @@ def setup_forwarded_ports(config, forwarded_ports)
 end
 
 def install_default_packages(config, packages_to_install)
+  config.vm.provision :shell, :inline => "cd && sudo apt-get update"
   packages_to_install.each do |pkg|
     script = <<SCRIPT
     cd
