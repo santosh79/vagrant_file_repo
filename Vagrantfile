@@ -36,11 +36,7 @@ end
 def install_default_packages(config, packages_to_install)
   config.vm.provision :shell, :inline => "cd && sudo apt-get update"
   packages_to_install.each do |pkg|
-    script = <<SCRIPT
-    cd
-    sudo apt-get -y install #{pkg}
-SCRIPT
-    config.vm.provision :shell, :inline => script
+    config.vm.provision :shell, :inline => "cd && sudo apt-get -y install #{pkg}"
   end
 end
 
@@ -96,7 +92,6 @@ SCRIPT
     sudo npm install -g meteorite
     curl https://install.meteor.com/ | sh
 SCRIPT
-
   elixir_install_script = <<SCRIPT
     cd
     wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb
@@ -104,7 +99,16 @@ SCRIPT
     sudo apt-get update
     sudo apt-get -y install elixir
 SCRIPT
+  clojure_install_script = <<SCRIPT
+    mkdir -p /home/vagrant/bin
+    cd /home/vagrant/bin
+    wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+    chmod a+x lein
+    echo 'export PATH="/home/vagrant/bin:$PATH" >> /home/vagrant/.bashrc'
+    /home/vagrant/bin/lein
+SCRIPT
 
-  [node_install_script, mysql_script, pip_install_script, solr_install_script, neo_install_script, meteor_install_script, elixir_install_script]
+
+  [node_install_script, mysql_script, pip_install_script, solr_install_script, neo_install_script, meteor_install_script, elixir_install_script, clojure_install_script]
 end
 
