@@ -107,8 +107,17 @@ SCRIPT
     echo 'export PATH="/home/vagrant/bin:$PATH" >> /home/vagrant/.bashrc'
     /home/vagrant/bin/lein
 SCRIPT
+  redis_install = <<SCRIPT
+    cd
+    wget http://download.redis.io/releases/redis-3.0.0.tar.gz
+    tar xzf redis-3.0.0.tar.gz
+    cd redis-3.0.0
+    make
+    sudo make install
+    cd
+    rm -rf redis-3.0.0*
+SCRIPT
 
-
-  [node_install_script, mysql_script, pip_install_script, solr_install_script, neo_install_script, meteor_install_script, elixir_install_script, clojure_install_script]
+  [node_install_script, mysql_script, pip_install_script, solr_install_script, neo_install_script, meteor_install_script, elixir_install_script, clojure_install_script, redis_install]
 end
 
