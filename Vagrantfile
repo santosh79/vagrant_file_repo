@@ -121,3 +121,15 @@ SCRIPT
   [node_install_script, mysql_script, pip_install_script, solr_install_script, neo_install_script, meteor_install_script, elixir_install_script, clojure_install_script, redis_install]
 end
 
+def setup_aliases(config)
+  aliases = <<SCRIPT
+    echo "alias im='iex -S mix'" >> /home/vagrant/.bashrc
+    echo "alias mt='mix test'" >> /home/vagrant/.bashrc
+    echo "alias mr='mix run'" >> /home/vagrant/.bashrc
+    echo "alias mpr='mix phoenix.routes'" >> /home/vagrant/.bashrc
+    echo "alias mps='mix phoenix.server'" >> /home/vagrant/.bashrc
+SCRIPT
+  aliases.split(/\n/).each do |al|
+    config.vm.provision :shell, :inline => al
+  end
+end
