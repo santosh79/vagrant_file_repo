@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "ubuntu/edlab14"
+  config.vm.box = "ubuntu/santosh_ubuntu_14_04"
   config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/utopic/20150219.1/utopic-server-cloudimg-i386-vagrant-disk1.box"
   config.vm.provider "virtualbox" do |v|
     v.customize ["modifyvm", :id, "--memory", 384]
